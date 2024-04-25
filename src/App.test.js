@@ -13,9 +13,11 @@ test('App should render', () => {
   expect(screen.getByText('Welcome, party people!')).toBeInTheDocument();
 });
 
-test('Button should render', () => {
-  // TODO: change the expect to actually test something 😉
-  expect('no test written').toBe('tested');
+test('Button should render', async() => {
+  render(<App />);
+  const buttons = await screen.findAllByRole("button");
+  expect(buttons).toHaveLength(2);
+
 });
 
 /**
@@ -23,16 +25,9 @@ test('Button should render', () => {
  * hint: use fireEvent.click(element) to trigger a click event on an element
  */
 test('theme button should update button text', () => {
-  // TODO: change the expect to actually test something 😉
-  expect('no test written').toBe('tested');
-});
-
-// BONUS
-// hint: there is a `.toHaveStyle` method.
-// e.g.: expect(element).toHaveStyle('color: #FFF');
-test('theme button should toggle styles', () => {
-  // TODO: change the expect to actually test something 😉
-  expect('no test written').toBe('tested');
+  render(<App/>)
+  fireEvent.click(screen.getByText("Current theme: light"));
+  expect(document.body.style.backgroundColor).toBe("rgb(51, 51, 51)");
 });
 
 /**
@@ -45,7 +40,6 @@ test('theme button should toggle styles', () => {
  * (getByText will throw an error if it is not rendered)
  */
 test('hidden button should toggle hidden content', () => {
-  // TODO: change the expect to actually test something 😉
   expect('no test written').toBe('tested');
 });
 
